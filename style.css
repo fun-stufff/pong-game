@@ -1,0 +1,99 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --hue: 900;
+  --saturation: 20%;
+  --foreground-color: hsl(var(--hue), var(--saturation), 55%);
+  --background-color: hsl(var(--hue), var(--saturation), 20%);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  overflow: hidden;
+}
+
+.start-button {
+  --button-color: bisque;
+
+  background: none;
+  font-size: 2rem;
+  color: var(--button-color);
+  text-transform: uppercase;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 0.1em solid var(--button-color);
+  border-radius: 0.2em;
+  padding: 0.5em 0.8em;
+  cursor: pointer;
+}
+
+.start-page.start {
+  display: none;
+}
+
+.game-page.not-start {
+  display: none;
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  margin-top: 0.5em;
+  color: var(--foreground-color);
+}
+
+.score > * {
+  /* Make sure each takes 50% of the screen */
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 0 1em;
+  opacity: 0.7;
+}
+
+.score > :first-child {
+  text-align: right;
+  border-right: 0.1em solid var(--foreground-color);
+}
+
+.paddle {
+  --paddle-y: 50;
+
+  width: 2vw;
+  height: 20vh;
+  background-color: var(--foreground-color);
+  border-radius: 0.5em;
+  position: absolute;
+  top: calc(var(--paddle-y) * 1vh);
+  transform: translateY(-50%);
+}
+
+.paddle.left {
+  left: 1vw;
+}
+
+.paddle.right {
+  right: 1vw;
+}
+
+#ball {
+  --ball-x: 50;
+  --ball-y: 50;
+
+  width: 3vmin;
+  height: 3vmin;
+  background-color: var(--foreground-color);
+  border-radius: 50%;
+  position: absolute;
+  top: calc(var(--ball-y) * 1vh);
+  left: calc(var(--ball-x) * 1vw);
+  transform: translate(-50%, -50%);
+}
