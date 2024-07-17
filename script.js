@@ -10,7 +10,6 @@ const startButton = document.getElementsByClassName("start-button");
 const userScore = document.getElementById("user-score");
 const botScore = document.getElementById("bot-score");
 let prevTime;
-const PADDLE_SPEED = 10;
 
 startButton[0].addEventListener("click", startGame);
 
@@ -29,11 +28,7 @@ function startGame() {
 
   // By keyboard
   document.addEventListener("keydown", (e) => {
-    if (e.key == "ArrowDown") {
-      userPaddle.y = Math.min(100, userPaddle.y + PADDLE_SPEED);
-    } else if (e.key == "ArrowUp") {
-      userPaddle.y = Math.max(0, userPaddle.y - PADDLE_SPEED);
-    }
+    userPaddle.update_key(e.key);
     document.removeEventListener("mousemove", mouseMove);
   });
 
@@ -53,7 +48,7 @@ function update(time) {
     // Check collision
     ball.collision([userPaddle, botPaddle]);
     // Move bot paddle
-    botPaddle.update(delta, ball.y);
+    botPaddle.update_bot(delta, ball.y);
 
     if (gameOver()) {
       addScore();
